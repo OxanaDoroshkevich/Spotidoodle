@@ -1,5 +1,6 @@
 package com.spotidoodle.team13.spotidoodle;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -115,5 +116,23 @@ public class ChooseSortingAlgorithmActivity extends AppCompatActivity {
         bundle.putString("playlistTitle", playlistTitle);
         bundle.putString("ownerID", ownerID);
         bundle.putBoolean("isIncreasing", false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            this.playlist = bundle.getString("playlist");
+            this.playlistUri =  bundle.get("playlistUri").toString();
+            this.ACCSSES_TOKEN = bundle.getString("accessToken");
+            this.userID = bundle.getString("userID");
+            this.playlistTitle = bundle.getString("playlistTitle");
+            this.ownerID = bundle.getString("ownerID");
+        }
+        intent.putExtras(bundle);
+        setResult(Activity.RESULT_OK, intent);
     }
 }

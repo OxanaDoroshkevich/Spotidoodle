@@ -1,5 +1,6 @@
 package com.spotidoodle.team13.spotidoodle;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -286,6 +287,23 @@ public class SortMusicActivity extends AppCompatActivity implements SpotifyPlaye
         int height = dm.heightPixels;
         button.setMinimumWidth((width/2));
         button.setMinimumHeight((height - findViewById(R.id.header).getHeight() - findViewById(R.id.info_bg).getHeight()) / 4);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            this.playlist = bundle.getString("playlist");
+            this.playlistUri =  bundle.get("playlistUri").toString();
+            this.ACCSSES_TOKEN = bundle.getString("accessToken");
+            this.userID = bundle.getString("userID");
+            this.playlistTitle = bundle.getString("playlistTitle");
+        }
+        intent.putExtras(bundle);
+        setResult(Activity.RESULT_OK, intent);
     }
 
     @Override

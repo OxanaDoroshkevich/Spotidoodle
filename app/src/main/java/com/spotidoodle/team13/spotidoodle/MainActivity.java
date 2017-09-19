@@ -1,6 +1,7 @@
 package com.spotidoodle.team13.spotidoodle;
 
 import android.content.pm.ActivityInfo;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,12 +28,18 @@ import com.spotify.sdk.android.player.Spotify;
 import com.spotify.sdk.android.player.SpotifyPlayer;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+
 import kaaes.spotify.webapi.android.SpotifyApi;
 import kaaes.spotify.webapi.android.SpotifyService;
 import kaaes.spotify.webapi.android.models.Pager;
 import kaaes.spotify.webapi.android.models.PlaylistSimple;
 import kaaes.spotify.webapi.android.models.UserPrivate;
 import retrofit.Callback;
+import retrofit.RequestInterceptor;
+import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -114,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements SpotifyPlayer.Not
         this.ACCSSES_TOKEN = authResponse.getAccessToken();
         final TextView userName = (TextView) findViewById(R.id.textView);
         final ImageView userImage = (ImageView) findViewById(R.id.imageView2);
-        SpotifyService spotify = api.getService();
+        final SpotifyService spotify = api.getService();
         spotify.getMe(new Callback<UserPrivate>() {
             @Override
             public void success(UserPrivate userPrivate, Response response) {
@@ -133,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements SpotifyPlayer.Not
 
             @Override
             public void failure(RetrofitError error) {
-                userName.setText("Max Mustermann");
+                userName.setText("No Spotify user name found");
                 System.out.println(error.getStackTrace());
             }
         });
@@ -164,7 +171,10 @@ public class MainActivity extends AppCompatActivity implements SpotifyPlayer.Not
      * @param spotify
      */
     private void getUserPlaylists(final SpotifyService spotify) {
-        spotify.getMyPlaylists(new Callback<Pager<PlaylistSimple>>() {
+        HashMap<String, Object> options = new HashMap<>();
+        options.put(SpotifyService.OFFSET, 0);
+        options.put(SpotifyService.LIMIT, 50);
+        spotify.getMyPlaylists(options, new Callback<Pager<PlaylistSimple>>() {
             @Override
             public void success(Pager<PlaylistSimple> playlistSimplePager, Response response) {
                 myPlaylists = playlistSimplePager;
@@ -213,6 +223,55 @@ public class MainActivity extends AppCompatActivity implements SpotifyPlayer.Not
                 error.printStackTrace();
             }
         });
+        /*spotify.getMyPlaylists(new Callback<Pager<PlaylistSimple>>() {
+            @Override
+            public void success(Pager<PlaylistSimple> playlistSimplePager, Response response) {
+                myPlaylists = playlistSimplePager;
+                for (int i = 0; i < myPlaylists.items.size(); i++){
+                    final int iterator = i;
+                    Button playlistButton = new Button(MainActivity.this);
+                    playlistButton.setText(myPlaylists.items.get(i).name);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                        playlistButton.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
+                    }
+                    playlistButton.setId(iterator);
+                    TableLayout table = (TableLayout) findViewById(R.id.buttonLayout);
+                    playlistButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(MainActivity.this, ChooseTaskActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putString("playlist", myPlaylists.items.get(iterator).id);
+                            bundle.putString("playlistUri", myPlaylists.items.get(iterator).uri);
+                            bundle.putString("ownerID", myPlaylists.items.get(iterator).owner.id);
+                            bundle.putString("clientID", CLIENT_ID);
+                            bundle.putInt("requestCode", REQUEST_CODE);
+                            bundle.putString("accessToken", ACCSSES_TOKEN);
+                            bundle.putString("userID", userID);
+                            bundle.putString("playlistTitle", myPlaylists.items.get(iterator).name);
+                            bundle.putString("playlistID", myPlaylists.items.get(iterator).id);
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+                        }
+                    });
+                    playlistButton.setBackgroundColor(4);
+                    playlistButton.setGravity(Gravity.CENTER_HORIZONTAL);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT);
+                    playlistButton.setLayoutParams(params);
+                    TableRow row = new TableRow(MainActivity.this);
+                    TableRow.LayoutParams rowLayout = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+                    row.addView(playlistButton, rowLayout);
+                    TableLayout.LayoutParams tableLayout = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
+                    table.addView(row, tableLayout);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                error.printStackTrace();
+            }
+        });*/
     }
 
     /**

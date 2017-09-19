@@ -1,5 +1,6 @@
 package com.spotidoodle.team13.spotidoodle;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -292,5 +293,23 @@ public class SortedPlaylists  extends AppCompatActivity {
         this.getWindow().getWindowManager().getDefaultDisplay().getMetrics(dm);
         int width = dm.widthPixels;
         text.setWidth((width/5) * 2);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            this.playlist = bundle.getString("playlist");
+            this.playlistUri =  bundle.get("playlistUri").toString();
+            this.ACCSSES_TOKEN = bundle.getString("accessToken");
+            this.userID = bundle.getString("userID");
+            this.playlistTitle = bundle.getString("playlistTitle");
+            this.ownerID = bundle.getString("ownerID");
+        }
+        intent.putExtras(bundle);
+        setResult(Activity.RESULT_OK, intent);
     }
 }
