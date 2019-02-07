@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -139,6 +140,8 @@ public class SortedPlaylists  extends AppCompatActivity {
                                     row.addView(grid, rowLayout);
                                     playlistTable.addView(row);
                                 }
+                                final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+                                progressBar.setVisibility(View.INVISIBLE);
                             }
                         }
 

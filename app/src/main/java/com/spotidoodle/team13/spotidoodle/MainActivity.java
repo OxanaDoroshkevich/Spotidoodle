@@ -223,55 +223,6 @@ public class MainActivity extends AppCompatActivity implements SpotifyPlayer.Not
                 error.printStackTrace();
             }
         });
-        /*spotify.getMyPlaylists(new Callback<Pager<PlaylistSimple>>() {
-            @Override
-            public void success(Pager<PlaylistSimple> playlistSimplePager, Response response) {
-                myPlaylists = playlistSimplePager;
-                for (int i = 0; i < myPlaylists.items.size(); i++){
-                    final int iterator = i;
-                    Button playlistButton = new Button(MainActivity.this);
-                    playlistButton.setText(myPlaylists.items.get(i).name);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                        playlistButton.setTextAlignment(View.TEXT_ALIGNMENT_VIEW_START);
-                    }
-                    playlistButton.setId(iterator);
-                    TableLayout table = (TableLayout) findViewById(R.id.buttonLayout);
-                    playlistButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(MainActivity.this, ChooseTaskActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putString("playlist", myPlaylists.items.get(iterator).id);
-                            bundle.putString("playlistUri", myPlaylists.items.get(iterator).uri);
-                            bundle.putString("ownerID", myPlaylists.items.get(iterator).owner.id);
-                            bundle.putString("clientID", CLIENT_ID);
-                            bundle.putInt("requestCode", REQUEST_CODE);
-                            bundle.putString("accessToken", ACCSSES_TOKEN);
-                            bundle.putString("userID", userID);
-                            bundle.putString("playlistTitle", myPlaylists.items.get(iterator).name);
-                            bundle.putString("playlistID", myPlaylists.items.get(iterator).id);
-                            intent.putExtras(bundle);
-                            startActivity(intent);
-                        }
-                    });
-                    playlistButton.setBackgroundColor(4);
-                    playlistButton.setGravity(Gravity.CENTER_HORIZONTAL);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
-                    playlistButton.setLayoutParams(params);
-                    TableRow row = new TableRow(MainActivity.this);
-                    TableRow.LayoutParams rowLayout = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-                    row.addView(playlistButton, rowLayout);
-                    TableLayout.LayoutParams tableLayout = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
-                    table.addView(row, tableLayout);
-                }
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-                error.printStackTrace();
-            }
-        });*/
     }
 
     /**

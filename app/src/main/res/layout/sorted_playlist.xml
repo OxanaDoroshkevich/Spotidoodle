@@ -8,7 +8,7 @@
 
     <Button
         android:id="@+id/saveButton"
-        android:layout_width="72dp"
+        android:layout_width="88dp"
         android:layout_height="72dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
@@ -21,14 +21,33 @@
         android:id="@+id/playlistTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
+        android:autoText="true"
         android:text="your playlist"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
+        android:fontFamily="assets/fonts/Lato-Hairline.ttf"
+        android:textStyle="normal"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="8dp" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:foregroundGravity="center"
+        android:progress="25"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintLeft_toLeftOf="@+id/playlistTitle"
+        app:layout_constraintRight_toRightOf="@+id/sortButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/sortButton"
@@ -43,29 +62,29 @@
         app:srcCompat="@mipmap/ic_keyboard_arrow_up_white_36dp" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="88dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0"
-        android:id="@+id/scrollView2">
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_span="2"
-            android:stretchColumns="0,1"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:stretchColumns="0,1">
 
             <TableLayout
                 android:id="@+id/playlistTable"
-                android:stretchColumns="*"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:stretchColumns="*">
 
             </TableLayout>
         </LinearLayout>
