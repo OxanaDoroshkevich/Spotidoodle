@@ -1,7 +1,7 @@
-### SPOTIDOODLE
+# SPOTIDOODLE
 
 ## A project using the Spotify web API and the Spotify android SDK
-The ideawas to create an application with the use of the android Spotify SDK or the Web API which allows to sort
+The idea was to create an application with the use of the android Spotify SDK or the Web API which allows to sort
 your with Spotify created Playlist more specifically. At the moment, right now Spotify provides only a sort
 algorithm that allows to sort alphabetically the titles or the interpreter names, after the date a song was added
 and the albums. The idea was to provide another sort algorithm that allows you to sort the songs after the BPM,
@@ -11,7 +11,7 @@ Given that this is “just” an addon for the real Spotify application you can�
 playlist. The aim is to make a one button click solution for the user to store a song in his before chosen playlist, a
 one button click to delete the song of the actual playlist, to skip to the drop of a song or to skip the actual song.
 
-## Developing Vincent Weiss, Oxana Doroshkevich, Marco Himmelstein, Christoph Dörr, Frederick Wurfer
+### Developing Vincent Weiss, Oxana Doroshkevich, Marco Himmelstein, Christoph Dörr, Frederick Wurfer
 
 ### Tools
 
@@ -49,8 +49,9 @@ git reset --hard origin/master
 
 to get the version of your accounts master branch status.
 
-### And coding style
-
+## Coding style
+    
+``` Spotify android SDK authentication
 protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == REQUEST_CODE) {
@@ -67,34 +68,37 @@ protected void onActivityResult(int requestCode, int resultCode, Intent intent) 
             }
         }
     }
+```
 
-## Built With
+### Built With
 
 http://kaaes.github.io/spotify-web-api-android/javadoc/
 https://github.com/kaaes/spotify-web-api-android
 http://www.programcreek.com/java-api-examples/index.php?api=kaaes.spotify.webapi.android.models.Playlist
 http://www.programcreek.com/java-api-examples/index.php?api=kaaes.spotify.webapi.android.SpotifyService
 
-## Contributing
+### Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
+### Versioning
 
-Version 0.0.1
+Version 5.0
 
 ## Authors
 
-* **Oxana Doroshkevich** - *Initial work* - [Oxana Doroshkevich](https://github.com/OxanaDoroshkevich)
+* **Vincent Weiss** - *Initial work* - [Vincent Weiss](https://github.com/VincWeiss)
+* **Oxana Doroshkevich** - *Design work* - [Oxana Doroshkevich](https://github.com/OxanaDoroshkevich)
+* **Christoph Doerr** - *Developer* - [Christoph Doerr](https://github.com/ChristophDoerr)
+* **Marco Himmelstein** - *Developer* - [Marco Himmelstein](https://github.com/himmelst94)
+* **Frederick Wurfer** - *Developer* - [Frederick Wurfer](https://github.com/FreddyWurfer)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-## License
+### License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* avaliable in play store
